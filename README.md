@@ -64,5 +64,6 @@ This opens the data_file in read mode and assigns its content to the variable da
     template_value = template_data.get('template', '')
     
 This block uses the yaml.safe_load() function from the yaml module to parse the content of data_content as YAML data. The resulting data is stored in the template_data variable.
-The next line uses the get() method on template_data to retrieve the value associated with the key 'template'. If the key does not exist, it assigns an empty string to template_valu
+The next line uses the get() method on template_data to retrieve the value associated with the key 'template'. If the key does not exist, it assigns an empty string to template_value
 
+    
