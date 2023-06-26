@@ -105,4 +105,4 @@ Execute the following command to initiate the deployment
 
 
 
-## 1. How to Use Python Script.
+## 2. How to Use Python Script.
