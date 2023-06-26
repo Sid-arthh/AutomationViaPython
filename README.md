@@ -102,3 +102,7 @@ Execute the following command to initiate the deployment
 
     bash_command = f"aws cloudformation deploy --template-file output.yml --stack-name {template_value} --capabilities CAPABILITY_NAMED_IAM --region us-east-1"
     subprocess.run(bash_command, shell=True)
+
+
+
+## 1. How to Use Jinja Template
