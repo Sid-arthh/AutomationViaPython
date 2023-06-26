@@ -22,7 +22,9 @@ with open(template_file, 'r') as f:
 
 
 template = Template(template_content)
-
+if not template_file:
+    template_file = template_value + '.yaml'
+    
 output = template.render(s3Bucket=template_data.get('s3Bucket', {}))
 
 with open('output.yml', 'w') as f:
