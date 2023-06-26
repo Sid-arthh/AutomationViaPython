@@ -11,7 +11,7 @@ The Jinja2 template allows you to create resources by providing a parameter YAML
 ### Usage Instructions
 #### Download the Pthon script for jinja template File
 
-    Download the JinjaTemplate.py file, which contains the python Code to handle Jinja template and deployment logic.
+Download the JinjaTemplate.py file, which contains the python Code to handle Jinja template and deployment logic.
     
 #### Prepare the Resource Template File
 
