@@ -162,10 +162,26 @@ a. This is a function named read_file that takes a file_path argument. It opens 
         return content
 
 b. This is a function named process_template that takes a template_file argument. It processes the template file by performing several operations:
-   * It determines the directory of the template_file using os.path.dirname().
-   * It assigns template_file to parameter_file.
-   * It reads the content of parameter_file using the read_file() function and loads it as YAML data into parameter_template using yaml.safe_load().
-   * It retrieves the value associated with the key 'template' from parameter_template and assigns it to template_value.
-   * It generates the resource file name by appending .yml to template_value and checks if the file exists in the template directory. If not, it tries with .yaml           extension.
-   * It reads the content of the resource file using the read_file() function and loads it as YAML data into resource_template using yaml.safe_load().
+    def process_template(template_file):
+    template_dir = os.path.dirname(template_file)
+    parameter_file = template_file
+    template_content = read_file(parameter_file)
+    parameter_template = yaml.safe_load(template_content)
+
+    template_value = parameter_template.get('template', '')
+    template_file_name = template_value + '.yml'
+    resource_file = os.path.join(template_dir, template_file_name)
+
+    if not os.path.exists(resource_file):
+        template_file_name = template_value + '.yaml'
+        resource_file = os.path.join(template_dir, template_file_name)
+
+    resource_content = read_file(resource_file)
+    resource_template = yaml.safe_load(resource_content)
+* It determines the directory of the template_file using os.path.dirname().
+* It assigns template_file to parameter_file.
+* It reads the content of parameter_file using the read_file() function and loads it as YAML data into parameter_template using yaml.safe_load().
+* It retrieves the value associated with the key 'template' from parameter_template and assigns it to template_value.
+* It generates the resource file name by appending .yml to template_value and checks if the file exists in the template directory. If not, it tries with .yaml           extension.
+* It reads the content of the resource file using the read_file() function and loads it as YAML data into resource_template using yaml.safe_load().
 
