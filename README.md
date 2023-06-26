@@ -48,23 +48,24 @@ The second line imports the yaml module, which allows working with YAML files.
 The third line imports the sys module, which provides access to system-specific parameters and functions.
 The fourth line imports the subprocess module, which allows running shell commands from within Python.
 
-#### Interacting with Console 
+#### Interacting with Console
+a. This block of code checks if the script was executed with at least two command-line arguments. If not, it prints an error message and exits the script with a status code of 1. Then fourth line assigns the value of the second command-line argument to the variable data_file
     if len(sys.argv) < 2:
         print("Please provide the data file as a command-line argument.")
         sys.exit(1)
     data_file = sys.argv[1]
-This block of code checks if the script was executed with at least two command-line arguments. If not, it prints an error message and exits the script with a status code of 1. Then fourth line assigns the value of the second command-line argument to the variable data_file
 
 #### File handling 
+a. This opens the data_file in read mode and assigns its content to the variable data_content. The with statement ensures that the file is automatically closed after reading.
     with open(data_file, 'r') as f:
     data_content = f.read()
-This opens the data_file in read mode and assigns its content to the variable data_content. The with statement ensures that the file is automatically closed after reading.
 
+b. This block uses the yaml.safe_load() function from the yaml module to parse the content of data_content as YAML data. The resulting data is stored in the template_data variable.
+The next line uses the get() method on template_data to retrieve the value associated with the key 'template'. If the key does not exist, it assigns an empty string to template_value
     template_data = yaml.safe_load(data_content)
     template_value = template_data.get('template', '')
     
-This block uses the yaml.safe_load() function from the yaml module to parse the content of data_content as YAML data. The resulting data is stored in the template_data variable.
-The next line uses the get() method on template_data to retrieve the value associated with the key 'template'. If the key does not exist, it assigns an empty string to template_value
+
 
     template_file = template_value + '.yml'
     if not template_file:
