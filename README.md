@@ -232,3 +232,45 @@ d. There is a recursive function named get_nested_value that retrieves a nested 
 * If a nested value is found, it returns that value.
 * If data is not a dictionary, it returns None.
 
+e. This section initializes an empty dictionary named replacements and populates it with key-value pairs from parameter_template where the value is a dictionary.
+    replacements = {}
+    for key, value in parameter_template.items():
+        if isinstance(value, dict):
+            replacements[key] = value
+    
+    replace_values(resource_template, replacements)
+    
+    formatted_content = yaml.dump(resource_template, sort_keys=False)
+    
+    with open('out.yml', 'w') as f:
+        f.write(formatted_content)
+
+* This section initializes an empty dictionary named replacements and populates it with key-value pairs from parameter_template where the value is a dictionary.
+* It calls the replace_values() function, passing resource_template and replacements as arguments, to perform the value replacements in the resource_template.
+* It formats the modified resource_template as YAML data and stores it in the formatted_content variable using yaml.dump().
+* It writes the formatted_content to a file named 'out.yml' using a with statement.
+
+#### Stack Deployment
+This line constructs a command as a string that will be executed in the shell. The command is a call to the AWS CLI (aws cloudformation deploy) to deploy a CloudFormation stack.
+
+* The template file to be deployed is set as 'out.yml'.
+* The stack name is set to the value of template_value.
+* The --capabilities flag is set to CAPABILITY_NAMED_IAM.
+* The AWS region is set to us-east-1.
+* The constructed command is executed using subprocess.run().
+
+#### Console Interaction
+This is the main entry point of the script.
+    if len(sys.argv) < 2:
+        print("Please provide the template file as a command-line argument.")
+        sys.exit(1)
+
+    template_file = sys.argv[1]
+
+    process_template(template_file)
+    
+* This is the main entry point of the script.
+* It checks if the number of command-line arguments provided is less than 2 (indicating no template file was provided).
+* If no template file is provided, it prints an error message and exits the script with a non-zero status code (sys.exit(1)).
+* If a template file is provided, it assigns it to template_file.
+* It calls the process_template() function, passing template_file as an argument to begin the template processing.
