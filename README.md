@@ -160,12 +160,13 @@ a. This is a function named read_file that takes a file_path argument. It opens 
         with open(file_path, 'r') as f:
             content = f.read()
         return content
-        
-* This is a function named process_template that takes a template_file argument. It processes the template file by performing several operations:
-   It determines the directory of the template_file using os.path.dirname().
-   It assigns template_file to parameter_file.
-   It reads the content of parameter_file using the read_file() function and loads it as YAML data into parameter_template using yaml.safe_load().
-   It retrieves the value associated with the key 'template' from parameter_template and assigns it to template_value.
-   It generates the resource file name by appending .yml to template_value and checks if the file exists in the template directory. If not, it tries with .yaml           extension.
-   It reads the content of the resource file using the read_file() function and loads it as YAML data into resource_template using yaml.safe_load().
+
+b. Parameter and Resource template
+This is a function named process_template that takes a template_file argument. It processes the template file by performing several operations:
+   * It determines the directory of the template_file using os.path.dirname().
+   * It assigns template_file to parameter_file.
+   * It reads the content of parameter_file using the read_file() function and loads it as YAML data into parameter_template using yaml.safe_load().
+   * It retrieves the value associated with the key 'template' from parameter_template and assigns it to template_value.
+   * It generates the resource file name by appending .yml to template_value and checks if the file exists in the template directory. If not, it tries with .yaml           extension.
+   * It reads the content of the resource file using the read_file() function and loads it as YAML data into resource_template using yaml.safe_load().
 
