@@ -213,3 +213,22 @@ c. This is a recursive function named replace_values that replaces specific valu
 * It calls another function, get_nested_value, passing the nested value and the second part (value) of the match to obtain the replacement value.
 * If the replacement value is not None, it replaces the original value in data with the new value using the replace() method.
 * If the value is not a string, it recursively calls the replace_values() function on the nested value.
+
+d. There is a recursive function named get_nested_value that retrieves a nested value from a dictionary (data) based on the provided key
+
+    def get_nested_value(data, key):
+    if isinstance(data, dict):
+        if key in data:
+            return data[key]
+        for value in data.values():
+            nested_value = get_nested_value(value, key)
+            if nested_value is not None:
+                return nested_value
+    else:
+        return None
+
+* If data is a dictionary, it checks if the key exists in data and returns the corresponding value if found.
+* If the key is not found, it recursively calls get_nested_value() on each value in data to search for the key.
+* If a nested value is found, it returns that value.
+* If data is not a dictionary, it returns None.
+
