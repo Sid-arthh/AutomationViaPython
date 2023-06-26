@@ -9,7 +9,7 @@ The Jinja2 template allows you to create resources by providing a parameter YAML
     AWS CLI configured with the necessary credentials and access rights to perform CloudFormation deployment.
 
 ### Usage Instructions
-### Download the Pthon script for jinja template File
+### Download the Python script for jinja template File
 
 Download the JinjaTemplate.py file, which contains the python Code to handle Jinja template and deployment logic.
     
@@ -29,6 +29,7 @@ Open a terminal or command prompt and navigate to the directory where the templa
 Execute the following command, providing the path to the parameter YAML file as a command-line argument:
 
     python3 template.py parameter.yml
+    
 ### Review the Output
 
 The template will read the provided parameter YAML file and render the template accordingly.
@@ -106,3 +107,65 @@ Execute the following command to initiate the deployment
 
 
 ## 2. How to Use Python Script.
+### Introduction
+The Jinja2 template allows you to create resources by providing a parameter YAML file.
+
+### Prerequisites
+    Python 3.x installed on your system.
+    Required dependencies:yaml, and awscli.
+    AWS CLI configured with the necessary credentials and access rights to perform CloudFormation deployment.
+
+### Usage Instructions
+### Download the Cfn Python wraper script template File
+
+Download the CfnOptimized.py file, which contains the python Code.
+
+### Prepare the Resource Template File
+
+Create or obtain a Resource YAML file (ResourceName.yml) that contains the necessary data for resource creation.
+The resource file should follow the required structure should follow the required file format.
+    
+### Prepare the Parameter File
+
+Create or obtain a parameter YAML file (parameter.yml) that contains the necessary data for resource creation.
+The parameter file should follow the required structure specified in the template.
+
+### Run the Template
+
+Open a terminal or command prompt and navigate to the directory where the template.py file is saved.
+Execute the following command, providing the path to the parameter YAML file as a command-line argument:
+
+    python3 template.py parameter.yml
+    
+### Review the Output
+
+The template will read the provided parameter YAML file and render the template accordingly.
+The rendered output will be saved in an out.yml file.
+Check the terminal or command prompt for any error messages or status updates during the execution.
+
+## Python Code Overview
+### This section will give a basic understanding of Code used.
+#### Imports
+The first five lines import necessary modules (yaml, re, sys, os, subprocess) used in the script.
+    import yaml
+    import re
+    import sys
+    import os
+    import subprocess
+
+#### File handling and Functions
+a. This is a function named read_file that takes a file_path argument. It opens the file located at file_path, reads its content, and returns it as a string.    
+    
+    def read_file(file_path):
+        with open(file_path, 'r') as f:
+            content = f.read()
+        return content
+
+b. This is a function named process_template that takes a template_file argument. It processes the template file by performing several operations:
+   It determines the directory of the template_file using os.path.dirname().
+   It assigns template_file to parameter_file.
+   It reads the content of parameter_file using the read_file() function and loads it as YAML data into parameter_template using yaml.safe_load().
+   It retrieves the value associated with the key 'template' from parameter_template and assigns it to template_value.
+   It generates the resource file name by appending .yml to template_value and checks if the file exists in the template directory. If not, it tries with .yaml           extension.
+   It reads the content of the resource file using the read_file() function and loads it as YAML data into resource_template using yaml.safe_load().
+
