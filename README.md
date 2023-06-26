@@ -69,9 +69,18 @@ The next line uses the get() method on template_data to retrieve the value assoc
     
 
 c. This line concatenates the value of template_value with the string '.yml' or '.yaml' to form the name of the template file and assigns it to template_file.
+
     template_file = template_value + '.yml'
     if not template_file:
     template_file = template_value + '.yaml'
 
 
-    
+d.This opens the template_file in read mode and assigns its content to the variable template_content. Again, the with statement ensures the file is closed after reading.
+
+    with open(template_file, 'r') as f:
+    template_content = f.read()
+
+e. This line creates a Jinja2 Template object using the template_content as the template source.
+
+    template = Template(template_content)
+
