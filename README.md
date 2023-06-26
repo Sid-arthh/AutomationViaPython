@@ -161,7 +161,8 @@ a. This is a function named read_file that takes a file_path argument. It opens 
             content = f.read()
         return content
 
-b. This is a function named process_template that takes a template_file argument. It processes the template file by performing several operations:
+b. There is a function named process_template that takes a template_file argument. It processes the template file by performing several operations:
+   
     def process_template(template_file):
     template_dir = os.path.dirname(template_file)
     parameter_file = template_file
@@ -185,3 +186,29 @@ b. This is a function named process_template that takes a template_file argument
 * It generates the resource file name by appending .yml to template_value and checks if the file exists in the template directory. If not, it tries with .yaml           extension.
 * It reads the content of the resource file using the read_file() function and loads it as YAML data into resource_template using yaml.safe_load().
 
+c. This is a recursive function named replace_values that replaces specific values within a nested dictionary (data) based on the provided replacements dictionary.
+        def replace_values(data, replacements):
+        if isinstance(data, dict):
+            for key, value in data.items():
+                if isinstance(value, str):
+                    matches = re.findall(r'\w+\.\w+', value)
+                    for match in matches:
+                        parts = match.split('.')
+                        if parts[0] in replacements:
+                            replace_key = parts[0]
+                            replace_value = parts[1]
+                            if replace_key in replacements:
+                                nested_value = replacements[replace_key]
+                                new_value = get_nested_value(nested_value, replace_value)
+                                if new_value is not None:
+                                    data[key] = data[key].replace(match, new_value)
+                else:
+                    replace_values(value, replacements)
+                    
+* It iterates over the key-value pairs of data.
+* If the value is a string, it searches for matches of the pattern '\w+\.\w+' using regular expressions (re.findall()).
+* For each match, it splits the match into two parts based on the dot separator.
+* If the first part (key) is present in the replacements dictionary, it retrieves the corresponding nested value.
+* It calls another function, get_nested_value, passing the nested value and the second part (value) of the match to obtain the replacement value.
+* If the replacement value is not None, it replaces the original value in data with the new value using the replace() method.
+* If the value is not a string, it recursively calls the replace_values() function on the nested value.
