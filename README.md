@@ -84,3 +84,21 @@ e. This line creates a Jinja2 Template object using the template_content as the 
 
     template = Template(template_content)
 
+f. In this line of code, the double asterisks (**) are used to pass the dictionary template_data as keyword arguments to the render() method. This syntax is known as "unpacking" the dictionary, and it allows each key-value pair in template_data to be passed as a separate keyword argument to the render() method.
+
+    output = template.render(**template_data)
+
+g. This block opens a file named 'output.yml' in write mode and writes the output string to the file. The with statement ensures the file is automatically closed after writing.
+
+    with open('output.yml', 'w') as f:
+    f.write(output)
+
+#### CFN deploy
+
+a. This line constructs a shell command as a string, which will be executed using the `subprocess
+b. Also If desired, you can deploy the rendered template using AWS CloudFormation.
+Ensure that you have the necessary AWS CLI credentials configured on your system.
+Execute the following command to initiate the deployment
+
+    bash_command = f"aws cloudformation deploy --template-file output.yml --stack-name {template_value} --capabilities CAPABILITY_NAMED_IAM --region us-east-1"
+    subprocess.run(bash_command, shell=True)
