@@ -105,4 +105,4 @@ Execute the following command to initiate the deployment
 
 
 
-## 1. How to Use Jinja Template
+## 1. How to Use Python Script.
