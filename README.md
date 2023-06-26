@@ -59,11 +59,10 @@ This block of code checks if the script was executed with at least two command-l
     with open(data_file, 'r') as f:
     data_content = f.read()
 This opens the data_file in read mode and assigns its content to the variable data_content. The with statement ensures that the file is automatically closed after reading.
-------------------->
+
     template_data = yaml.safe_load(data_content)
     template_value = template_data.get('template', '')
     
 This block uses the yaml.safe_load() function from the yaml module to parse the content of data_content as YAML data. The resulting data is stored in the template_data variable.
-The next line uses the get() method on template_data to retrieve the value associated with the key 'template'. If the key does not exist, it assigns an empty string to template_value
--------------------
+The next line uses the get() method on template_data to retrieve the value associated with the key 'template'. If the key does not exist, it assigns an empty string to template_valu
 
