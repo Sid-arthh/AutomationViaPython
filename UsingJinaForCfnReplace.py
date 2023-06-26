@@ -25,7 +25,7 @@ template = Template(template_content)
 if not template_file:
     template_file = template_value + '.yaml'
     
-output = template.render(s3Bucket=template_data.get('s3Bucket', {}))
+output = template.render(**template_data)
 
 with open('output.yml', 'w') as f:
     f.write(output)
