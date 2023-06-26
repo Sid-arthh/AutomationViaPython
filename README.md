@@ -261,6 +261,7 @@ This line constructs a command as a string that will be executed in the shell. T
 
 #### Console Interaction
 This is the main entry point of the script.
+   
     if len(sys.argv) < 2:
         print("Please provide the template file as a command-line argument.")
         sys.exit(1)
