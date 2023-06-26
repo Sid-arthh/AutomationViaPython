@@ -187,6 +187,7 @@ b. There is a function named process_template that takes a template_file argumen
 * It reads the content of the resource file using the read_file() function and loads it as YAML data into resource_template using yaml.safe_load().
 
 c. This is a recursive function named replace_values that replaces specific values within a nested dictionary (data) based on the provided replacements dictionary.
+
         def replace_values(data, replacements):
         if isinstance(data, dict):
             for key, value in data.items():
