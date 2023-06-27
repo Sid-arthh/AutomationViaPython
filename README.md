@@ -233,6 +233,7 @@ d. There is a recursive function named get_nested_value that retrieves a nested 
 * If data is not a dictionary, it returns None.
 
 e. This section initializes an empty dictionary named replacements and populates it with key-value pairs from parameter_template where the value is a dictionary.
+
     replacements = {}
     for key, value in parameter_template.items():
         if isinstance(value, dict):
@@ -252,6 +253,10 @@ e. This section initializes an empty dictionary named replacements and populates
 
 #### Stack Deployment
 This line constructs a command as a string that will be executed in the shell. The command is a call to the AWS CLI (aws cloudformation deploy) to deploy a CloudFormation stack.
+
+    bash_command = f"aws cloudformation deploy --template-file out.yml --stack-name {template_value} --capabilities CAPABILITY_NAMED_IAM --region us-east-1"
+    subprocess.run(bash_command, shell=True)
+
 
 * The template file to be deployed is set as 'out.yml'.
 * The stack name is set to the value of template_value.
