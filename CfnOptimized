@@ -29,30 +29,26 @@ def process_template(template_file):
     def replace_values(data, replacements):
         if isinstance(data, dict):
             for key, value in data.items():
-                if isinstance(value, str):
-                    matches = re.findall(r'\w+\.\w+', value)
-                    for match in matches:
-                        parts = match.split('.')
+                if isinstance(value, str) and '.' in value:
+                        parts = value.split('.')
                         if parts[0] in replacements:
                             replace_key = parts[0]
                             replace_value = parts[1]
-                            if replace_key in replacements:
-                                nested_value = replacements[replace_key]
-                                new_value = get_nested_value(nested_value, replace_value)
-                                if new_value is not None:
-                                    data[key] = data[key].replace(match, new_value)
+                            nested_value = replacements[replace_key]
+                            new_value = get_nested_value(nested_value, replace_value)
+                            if new_value is not None:
+                                data[key] = data[key].replace(value, new_value)
                 else:
                     replace_values(value, replacements)
- 
+
+        elif isinstance(data, list):
+            for item in data:
+                replace_values(item, replacements)
+
     def get_nested_value(data, key):
         if isinstance(data, dict):
             if key in data:
-                return data[key]
-            for value in data.values():
-                nested_value = get_nested_value(value, key)
-                if nested_value is not None:
-                    return nested_value
-
+                return str(data[key])
         else:
              return None
 
@@ -69,9 +65,9 @@ def process_template(template_file):
         f.write(formatted_content)
 
     # deploy command
-    bash_command = f"aws cloudformation deploy --template-file out.yml --stack-name {template_value} --capabilities CAPABILITY_NAMED_IAM --region us-east-1"
-    subprocess.run(bash_command, shell=True)
-
+    # bash_command = f"aws cloudformation deploy --template-file out.yml --stack-name {template_value} --capabilities CAPABILITY_NAMED_IAM --region us-east-1"
+    # subprocess.run(bash_command, shell=True)
+print("out.yml is your ouput file ")
 # Starting Poing  is here.....
 if len(sys.argv) < 2:
     print("Please provide the template file as a command-line argument.")
