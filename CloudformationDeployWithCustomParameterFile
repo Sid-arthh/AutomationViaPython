@@ -51,7 +51,7 @@ def process_template(template_file):
     def get_nested_value(data, key):
         if isinstance(data, dict):
             if key in data:
-                return data[key]
+                return str(data[key])
             for value in data.values():
                 nested_value = get_nested_value(value, key)
                 if nested_value is not None:
